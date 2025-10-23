@@ -151,6 +151,24 @@ Data focuses on Investor-Owned Utility territories:
 
 Consumer-Owned Utilities (COUs) not fully represented.
 
+## 🔄 Data Updates
+
+This project is designed for easy data updates as new information becomes available.
+
+**Update Schedule:**
+- AMI Data: Annually (HUD releases spring)
+- Housing Estimates: Every 1-2 years
+- Population: Annually (Census)
+
+**Documentation:**
+- **[UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md)** - Step-by-step instructions for updating data
+- **[DATA_VERSION.md](docs/DATA_VERSION.md)** - Version history and changelog
+
+**Current Data Version**: 1.0 (October 2025)
+- AMI: HUD FY 2025
+- Housing: Energy Trust August 2025  
+- Population: Census 2023
+
 ## 🔮 Future Enhancements
 
 - [ ] Historical trend analysis (2015-2025)
