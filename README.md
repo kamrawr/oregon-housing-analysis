@@ -1,6 +1,6 @@
 # Oregon Housing Analysis
 
-**Live Site:** Coming Soon
+**🌐 Live Site:** [https://kamrawr.github.io/oregon-housing-analysis/](https://kamrawr.github.io/oregon-housing-analysis/)
 
 Comprehensive analysis of housing, income, and affordability across Oregon's 36 counties with focus on Investor-Owned Utility (IOU) service territories.
 
