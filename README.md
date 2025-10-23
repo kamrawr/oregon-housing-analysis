@@ -190,7 +190,7 @@ This project is designed for easy data updates as new information becomes availa
 
 ### Background Research
 - Oregon Statewide Housing Needs Analysis (2020)
-- Energy Trust Strategic Plan 2020-2024
+- Energy Trust Strategic Plan 2020-2025
 - Portland Metro 2040 Growth Concept
 - County-level housing studies
 
