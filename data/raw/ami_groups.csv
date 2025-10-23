@@ -1,0 +1,23 @@
+AMI_100_4Person,County,County_Count
+124100,"['Clackamas County', 'Columbia County', 'Multnomah County', 'Washington County', 'Yamhill County']",5
+117900,['Benton County'],1
+114300,['Deschutes County'],1
+106900,['Hood River County'],1
+96400,['Clatsop County'],1
+92700,['Linn County'],1
+92600,"['Marion County', 'Polk County']",2
+92400,['Jackson County'],1
+91700,['Lane County'],1
+91300,"['Crook County', 'Wasco County']",2
+88300,['Lake County'],1
+86000,['Baker County'],1
+85900,['Morrow County'],1
+84800,"['Jefferson County', 'Josephine County']",2
+84500,['Wallowa County'],1
+83700,['Sherman County'],1
+83600,['Douglas County'],1
+83500,['Tillamook County'],1
+83100,['Coos County'],1
+82800,"['Gilliam County', 'Union County']",2
+82600,['Lincoln County'],1
+81400,"['Curry County', 'Grant County', 'Harney County', 'Klamath County', 'Malheur County', 'Umatilla County', 'Wheeler County']",7
