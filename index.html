@@ -343,6 +343,156 @@
             border-radius: 4px;
         }
         
+        /* Justice40 Styles */
+        .justice40-toggle {
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-top: 15px;
+            width: 100%;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .justice40-toggle:hover {
+            background-color: #7d3c98;
+            transform: translateY(-1px);
+        }
+        
+        .justice40-toggle-icon {
+            transition: transform 0.3s;
+        }
+        
+        .justice40-toggle.active .justice40-toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .justice40-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: #f8f4ff;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .justice40-content.active {
+            max-height: 1000px;
+            padding: 15px;
+            border: 2px solid #8e44ad;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        .justice40-header {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .dac-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .dac-metric {
+            background-color: white;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            border: 2px solid #d7bde2;
+        }
+        
+        .dac-metric-value {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #8e44ad;
+            display: block;
+        }
+        
+        .dac-metric-label {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .burden-categories {
+            background-color: white;
+            padding: 12px;
+            border-radius: 6px;
+            border: 2px solid #d7bde2;
+        }
+        
+        .burden-categories h5 {
+            margin: 0 0 10px 0;
+            color: #8e44ad;
+            font-size: 1em;
+            border-bottom: 2px solid #d7bde2;
+            padding-bottom: 5px;
+        }
+        
+        .burden-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
+        }
+        
+        .burden-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 8px;
+            background-color: #faf9fc;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+        
+        .burden-label {
+            color: #555;
+        }
+        
+        .burden-value {
+            font-weight: bold;
+            color: #8e44ad;
+            background-color: #e8daef;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.9em;
+        }
+        
+        .burden-value.zero {
+            color: #95a5a6;
+            background-color: #ecf0f1;
+        }
+        
+        .dac-high {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        
+        .dac-medium {
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .dac-low {
+            color: #95a5a6;
+            font-weight: bold;
+        }
+        
         .ami-high {
             color: #27ae60;
             font-weight: bold;
@@ -766,6 +916,12 @@
                             • Significant ADU development potential
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Multnomah')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-multnomah"></div>
                 </div>
                 
                 <div class="county-card" data-county="washington" data-region="metro" data-ami-level="high" data-energy-trust="yes">
@@ -840,6 +996,12 @@
                             • Limited affordable housing options
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Washington')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-washington"></div>
                 </div>
                 
                 <div class="county-card" data-county="clackamas" data-region="metro" data-ami-level="high" data-energy-trust="yes">
@@ -914,6 +1076,12 @@
                             • Rural areas with limited infrastructure
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Clackamas')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-clackamas"></div>
                 </div>
                 
                 <div class="county-card" data-county="columbia" data-region="metro" data-ami-level="high" data-energy-trust="yes">
@@ -988,6 +1156,12 @@
                             • Industrial employment base
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Columbia')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-columbia"></div>
                 </div>
                 
                 <div class="county-card" data-county="yamhill" data-region="metro" data-ami-level="high" data-energy-trust="yes">
@@ -1062,6 +1236,12 @@
                             • Strong agricultural worker population
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Yamhill')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-yamhill"></div>
                 </div>
                 </div>
             </div>
@@ -1148,6 +1328,12 @@
                             • Urban growth boundary pressures
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Marion')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-marion"></div>
                 </div>
                 
                 <div class="county-card" data-county="lane" data-region="valley" data-ami-level="medium" data-energy-trust="partial">
@@ -1222,6 +1408,12 @@
                             • Rural areas with limited services
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Lane')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-lane"></div>
                 </div>
                 
                 <div class="county-card" data-county="benton" data-region="valley" data-ami-level="high" data-energy-trust="partial">
@@ -1296,6 +1488,12 @@
                             • Research/tech employment base
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Benton')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-benton"></div>
                 </div>
                 
                 <div class="county-card" data-county="polk" data-region="valley" data-ami-level="medium" data-energy-trust="yes">
@@ -1370,6 +1568,12 @@
                             • Limited affordable housing options
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Polk')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-polk"></div>
                 </div>
                 
                 <div class="county-card" data-county="linn" data-region="valley" data-ami-level="medium" data-energy-trust="yes">
@@ -1444,6 +1648,12 @@
                             • Small city development patterns
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Linn')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-linn"></div>
                 </div>
                 </div>
             </div>
@@ -1530,6 +1740,12 @@
                             • Climate resilience concerns
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Clatsop')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-clatsop"></div>
                 </div>
                 
                 <div class="county-card" data-county="tillamook" data-region="coastal" data-ami-level="low" data-energy-trust="no">
@@ -1604,6 +1820,12 @@
                             • Limited affordable housing stock
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Tillamook')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-tillamook"></div>
                 </div>
                 
                 <div class="county-card" data-county="lincoln" data-region="coastal" data-ami-level="low" data-energy-trust="no">
@@ -1678,6 +1900,12 @@
                             • Workforce housing crisis
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Lincoln')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-lincoln"></div>
                 </div>
                 
                 <div class="county-card" data-county="coos" data-region="coastal" data-ami-level="low" data-energy-trust="no">
@@ -1752,6 +1980,12 @@
                             • Port and manufacturing base
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Coos')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-coos"></div>
                 </div>
                 
                 <div class="county-card" data-county="curry" data-region="coastal" data-ami-level="low" data-energy-trust="no">
@@ -1826,6 +2060,12 @@
                             • Significant seasonal housing
                         </div>
                     </div>
+                    
+                    <button class="justice40-toggle" onclick="toggleJustice40('Curry')">
+                        <span>Justice40 Environmental Justice Data</span>
+                        <span class="justice40-toggle-icon">▼</span>
+                    </button>
+                    <div class="justice40-content" id="justice40-curry"></div>
                 </div>
             </div>
         </section>
@@ -1915,6 +2155,12 @@
                                 • Wildfire risk considerations
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Jackson')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-jackson"></div>
                     </div>
                     
                     <div class="county-card" data-county="josephine" data-region="southern" data-ami-level="low" data-energy-trust="yes">
@@ -1989,6 +2235,12 @@
                                 • Wildfire and climate vulnerability
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Josephine')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-josephine"></div>
                     </div>
                     
                     <div class="county-card" data-county="douglas" data-region="southern" data-ami-level="low" data-energy-trust="yes">
@@ -2063,6 +2315,12 @@
                                 • Veterans' population
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Douglas')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-douglas"></div>
                     </div>
                     
                     <div class="county-card" data-county="klamath" data-region="southern" data-ami-level="low" data-energy-trust="yes">
@@ -2137,6 +2395,12 @@
                                 • Affordable housing available
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Klamath')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-klamath"></div>
                     </div>
                 </div>
             </div>
@@ -2223,6 +2487,12 @@
                                 • Tech and tourism economy
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Deschutes')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-deschutes"></div>
                     </div>
                     
                     <div class="county-card" data-county="hood-river" data-region="central" data-ami-level="medium" data-energy-trust="yes">
@@ -2297,6 +2567,12 @@
                                 • Windsurfing and outdoor recreation
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Hood River')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-hood-river"></div>
                     </div>
                     
                     <div class="county-card" data-county="jefferson" data-region="central" data-ami-level="low" data-energy-trust="yes">
@@ -2371,6 +2647,12 @@
                                 • Tribal housing programs
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Jefferson')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-jefferson"></div>
                     </div>
                     
                     <div class="county-card" data-county="crook" data-region="central" data-ami-level="low" data-energy-trust="yes">
@@ -2445,6 +2727,12 @@
                                 • Facebook data center impact
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Crook')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-crook"></div>
                     </div>
                     
                     <div class="county-card" data-county="wasco" data-region="central" data-ami-level="low" data-energy-trust="yes">
@@ -2519,6 +2807,12 @@
                                 • Transportation and logistics hub
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Wasco')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-wasco"></div>
                     </div>
                 </div>
             </div>
@@ -2605,6 +2899,12 @@
                                 • Agricultural worker housing needs
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Umatilla')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-umatilla"></div>
                     </div>
                     
                     <div class="county-card" data-county="baker" data-region="eastern" data-ami-level="low" data-energy-trust="yes">
@@ -2679,6 +2979,12 @@
                                 • Small population base
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Baker')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-baker"></div>
                     </div>
                     
                     <div class="county-card" data-county="union" data-region="eastern" data-ami-level="low" data-energy-trust="yes">
@@ -2753,6 +3059,12 @@
                                 • Limited affordable housing stock
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Union')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-union"></div>
                     </div>
                     
                     <div class="county-card" data-county="wallowa" data-region="eastern" data-ami-level="low" data-energy-trust="partial">
@@ -2827,6 +3139,12 @@
                                 • Seasonal housing challenges
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Wallowa')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-wallowa"></div>
                     </div>
                     
                     <div class="county-card" data-county="malheur" data-region="eastern" data-ami-level="low" data-energy-trust="partial">
@@ -2901,6 +3219,12 @@
                                 • Agricultural worker housing
                             </div>
                         </div>
+                        
+                        <button class="justice40-toggle" onclick="toggleJustice40('Malheur')">
+                            <span>Justice40 Environmental Justice Data</span>
+                            <span class="justice40-toggle-icon">▼</span>
+                        </button>
+                        <div class="justice40-content" id="justice40-malheur"></div>
                     </div>
                     
                     <!-- Additional Eastern Oregon counties continue... -->
@@ -2999,7 +3323,7 @@
         <!-- Continue with Southern Oregon, Central Oregon, and Eastern Oregon sections... -->
         
         <div class="note">
-            <strong>Database Status:</strong> This enhanced version includes detailed housing type distributions and comprehensive program targeting information for all 36 Oregon counties. Data compiled from multiple sources with August 2025 updates for staff use in program design and outreach planning.
+            <strong>Database Status:</strong> This enhanced version includes detailed housing type distributions, comprehensive program targeting information, and Justice40 Environmental Justice data for all 36 Oregon counties. Justice40 data shows Disadvantaged Communities (DAC) designation by census tract, population in DACs, and the 8 federal environmental justice burden categories. Data compiled from multiple sources with October 2025 updates for staff use in program design and outreach planning.
         </div>
 
         <div class="note">
@@ -3011,6 +3335,7 @@
                 <li>AMI levels guide affordability program targeting</li>
                 <li>Rental rates indicate tenant vs. owner-focused program needs</li>
                 <li>Program targeting notes provide context for outreach strategy</li>
+                <li><strong>NEW:</strong> Click "Justice40 Environmental Justice Data" button on any county card to view DAC designations and environmental/economic justice burden categories</li>
             </ul>
         </div>
 
@@ -3023,6 +3348,7 @@
                 <li><a href="https://www.pacificpower.net/">Pacific Power - Customer and Service Information</a></li>
                 <li><a href="https://energytrust.org/">Energy Trust of Oregon - Program Eligibility Maps</a></li>
                 <li><a href="https://www.oregon.gov/ohcs/compliance-monitoring/Documents/rents-incomes/2025/2025-County-Area-Median-Income-Summary.pdf">OHCS - 2025 County AMI Data</a></li>
+                <li><a href="https://screeningtool.geoplatform.gov/">Justice40 Climate and Economic Justice Screening Tool - Disadvantaged Communities Data</a></li>
             </ul>
             
             <p><strong>Last Updated:</strong> August 12, 2025 | <strong>Next Review:</strong> February 2026</p>
@@ -3138,6 +3464,159 @@
 
         // Initialize first filter button as active
         document.querySelector('.filter-btn').classList.add('active');
+        
+        // Justice40 Data Management - Embedded data to avoid CORS issues
+        const justice40Data = {
+            "Baker": {totalTracts: 6, dacTracts: 4, percentDac: 0.6667, popTotal: 16019, popInDac: 10612, percentPopInDac: 0.6625, climateChange: 2, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 1, workforceDevelopment: 0},
+            "Benton": {totalTracts: 18, dacTracts: 2, percentDac: 0.1111, popTotal: 91107, popInDac: 10120, percentPopInDac: 0.1111, climateChange: 0, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 1, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 1, workforceDevelopment: 0},
+            "Clackamas": {totalTracts: 80, dacTracts: 4, percentDac: 0.05, popTotal: 410463, popInDac: 12784, percentPopInDac: 0.0311, climateChange: 2, cleanEnergy: 0, cleanTransit: 2, affordableHousing: 1, pollutionRemediation: 1, cleanWater: 0, healthBurdens: 1, workforceDevelopment: 0},
+            "Clatsop": {totalTracts: 12, dacTracts: 3, percentDac: 0.25, popTotal: 39102, popInDac: 9734, percentPopInDac: 0.2489, climateChange: 2, cleanEnergy: 0, cleanTransit: 1, affordableHousing: 1, pollutionRemediation: 3, cleanWater: 0, healthBurdens: 0, workforceDevelopment: 0},
+            "Columbia": {totalTracts: 10, dacTracts: 4, percentDac: 0.4, popTotal: 51375, popInDac: 23242, percentPopInDac: 0.4524, climateChange: 3, cleanEnergy: 1, cleanTransit: 1, affordableHousing: 0, pollutionRemediation: 1, cleanWater: 0, healthBurdens: 0, workforceDevelopment: 1},
+            "Coos": {totalTracts: 14, dacTracts: 7, percentDac: 0.5, popTotal: 63686, popInDac: 42235, percentPopInDac: 0.6632, climateChange: 3, cleanEnergy: 0, cleanTransit: 2, affordableHousing: 0, pollutionRemediation: 2, cleanWater: 0, healthBurdens: 5, workforceDevelopment: 0},
+            "Crook": {totalTracts: 4, dacTracts: 3, percentDac: 0.75, popTotal: 23011, popInDac: 15445, percentPopInDac: 0.6712, climateChange: 2, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 0, workforceDevelopment: 1},
+            "Curry": {totalTracts: 6, dacTracts: 3, percentDac: 0.5, popTotal: 22650, popInDac: 12461, percentPopInDac: 0.5502, climateChange: 2, cleanEnergy: 1, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 2, workforceDevelopment: 0},
+            "Deschutes": {totalTracts: 24, dacTracts: 2, percentDac: 0.0833, popTotal: 186251, popInDac: 12792, percentPopInDac: 0.0687, climateChange: 2, cleanEnergy: 0, cleanTransit: 1, affordableHousing: 1, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 1, workforceDevelopment: 0},
+            "Douglas": {totalTracts: 23, dacTracts: 13, percentDac: 0.5652, popTotal: 109114, popInDac: 65550, percentPopInDac: 0.6007, climateChange: 7, cleanEnergy: 1, cleanTransit: 1, affordableHousing: 0, pollutionRemediation: 1, cleanWater: 1, healthBurdens: 8, workforceDevelopment: 3},
+            "Gilliam": {totalTracts: 1, dacTracts: 1, percentDac: 1.0, popTotal: 1878, popInDac: 1878, percentPopInDac: 1.0, climateChange: 0, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 0, workforceDevelopment: 0},
+            "Grant": {totalTracts: 2, dacTracts: 2, percentDac: 1.0, popTotal: 7189, popInDac: 7189, percentPopInDac: 1.0, climateChange: 2, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 2, workforceDevelopment: 0},
+            "Harney": {totalTracts: 2, dacTracts: 2, percentDac: 1.0, popTotal: 7267, popInDac: 7267, percentPopInDac: 1.0, climateChange: 1, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 1, cleanWater: 0, healthBurdens: 0, workforceDevelopment: 0},
+            "Hood River": {totalTracts: 4, dacTracts: 1, percentDac: 0.25, popTotal: 23209, popInDac: 5721, percentPopInDac: 0.2465, climateChange: 1, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 0, workforceDevelopment: 0},
+            "Jackson": {totalTracts: 41, dacTracts: 19, percentDac: 0.4634, popTotal: 216574, popInDac: 88032, percentPopInDac: 0.4065, climateChange: 7, cleanEnergy: 17, cleanTransit: 3, affordableHousing: 4, pollutionRemediation: 0, cleanWater: 3, healthBurdens: 8, workforceDevelopment: 5},
+            "Jefferson": {totalTracts: 6, dacTracts: 2, percentDac: 0.3333, popTotal: 23607, popInDac: 7051, percentPopInDac: 0.2987, climateChange: 2, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 1, workforceDevelopment: 2},
+            "Josephine": {totalTracts: 16, dacTracts: 12, percentDac: 0.75, popTotal: 86251, popInDac: 63122, percentPopInDac: 0.7318, climateChange: 10, cleanEnergy: 10, cleanTransit: 2, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 1, healthBurdens: 8, workforceDevelopment: 4},
+            "Klamath": {totalTracts: 20, dacTracts: 12, percentDac: 0.6, popTotal: 66921, popInDac: 40984, percentPopInDac: 0.6124, climateChange: 7, cleanEnergy: 9, cleanTransit: 3, affordableHousing: 2, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 9, workforceDevelopment: 7},
+            "Lake": {totalTracts: 2, dacTracts: 2, percentDac: 1.0, popTotal: 7837, popInDac: 7837, percentPopInDac: 1.0, climateChange: 2, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 1, cleanWater: 0, healthBurdens: 2, workforceDevelopment: 0},
+            "Lane": {totalTracts: 87, dacTracts: 34, percentDac: 0.3908, popTotal: 373340, popInDac: 148756, percentPopInDac: 0.3984, climateChange: 13, cleanEnergy: 1, cleanTransit: 12, affordableHousing: 6, pollutionRemediation: 6, cleanWater: 6, healthBurdens: 28, workforceDevelopment: 6},
+            "Lincoln": {totalTracts: 18, dacTracts: 7, percentDac: 0.3889, popTotal: 48547, popInDac: 22949, percentPopInDac: 0.4727, climateChange: 3, cleanEnergy: 0, cleanTransit: 2, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 1, healthBurdens: 3, workforceDevelopment: 1},
+            "Linn": {totalTracts: 21, dacTracts: 9, percentDac: 0.4286, popTotal: 125048, popInDac: 53431, percentPopInDac: 0.4273, climateChange: 1, cleanEnergy: 0, cleanTransit: 1, affordableHousing: 1, pollutionRemediation: 4, cleanWater: 1, healthBurdens: 4, workforceDevelopment: 1},
+            "Malheur": {totalTracts: 8, dacTracts: 7, percentDac: 0.875, popTotal: 30412, popInDac: 30412, percentPopInDac: 1.0, climateChange: 3, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 3, pollutionRemediation: 1, cleanWater: 0, healthBurdens: 1, workforceDevelopment: 1},
+            "Marion": {totalTracts: 58, dacTracts: 18, percentDac: 0.3103, popTotal: 339641, popInDac: 117430, percentPopInDac: 0.3457, climateChange: 5, cleanEnergy: 0, cleanTransit: 12, affordableHousing: 5, pollutionRemediation: 12, cleanWater: 6, healthBurdens: 9, workforceDevelopment: 7},
+            "Morrow": {totalTracts: 2, dacTracts: 2, percentDac: 1.0, popTotal: 11303, popInDac: 11303, percentPopInDac: 1.0, climateChange: 0, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 1, cleanWater: 0, healthBurdens: 0, workforceDevelopment: 0},
+            "Multnomah": {totalTracts: 171, dacTracts: 37, percentDac: 0.2164, popTotal: 804606, popInDac: 206946, percentPopInDac: 0.2572, climateChange: 2, cleanEnergy: 0, cleanTransit: 22, affordableHousing: 18, pollutionRemediation: 10, cleanWater: 5, healthBurdens: 11, workforceDevelopment: 16},
+            "Polk": {totalTracts: 12, dacTracts: 3, percentDac: 0.25, popTotal: 83037, popInDac: 10176, percentPopInDac: 0.1225, climateChange: 1, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 1, pollutionRemediation: 1, cleanWater: 1, healthBurdens: 3, workforceDevelopment: 0},
+            "Sherman": {totalTracts: 1, dacTracts: 1, percentDac: 1.0, popTotal: 1642, popInDac: 1642, percentPopInDac: 1.0, climateChange: 0, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 0, workforceDevelopment: 0},
+            "Tillamook": {totalTracts: 9, dacTracts: 6, percentDac: 0.6667, popTotal: 26389, popInDac: 20244, percentPopInDac: 0.7671, climateChange: 5, cleanEnergy: 2, cleanTransit: 1, affordableHousing: 0, pollutionRemediation: 2, cleanWater: 0, healthBurdens: 2, workforceDevelopment: 0},
+            "Umatilla": {totalTracts: 15, dacTracts: 8, percentDac: 0.5333, popTotal: 77129, popInDac: 42032, percentPopInDac: 0.545, climateChange: 4, cleanEnergy: 0, cleanTransit: 1, affordableHousing: 0, pollutionRemediation: 1, cleanWater: 0, healthBurdens: 1, workforceDevelopment: 2},
+            "Union": {totalTracts: 8, dacTracts: 2, percentDac: 0.25, popTotal: 26337, popInDac: 7373, percentPopInDac: 0.2799, climateChange: 2, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 1, pollutionRemediation: 0, cleanWater: 1, healthBurdens: 1, workforceDevelopment: 0},
+            "Wallowa": {totalTracts: 3, dacTracts: 2, percentDac: 0.6667, popTotal: 7004, popInDac: 5076, percentPopInDac: 0.7247, climateChange: 1, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 1, workforceDevelopment: 0},
+            "Wasco": {totalTracts: 8, dacTracts: 3, percentDac: 0.375, popTotal: 26130, popInDac: 10100, percentPopInDac: 0.3865, climateChange: 2, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 1, cleanWater: 0, healthBurdens: 1, workforceDevelopment: 0},
+            "Washington": {totalTracts: 104, dacTracts: 11, percentDac: 0.1058, popTotal: 589481, popInDac: 52757, percentPopInDac: 0.0895, climateChange: 0, cleanEnergy: 0, cleanTransit: 3, affordableHousing: 4, pollutionRemediation: 2, cleanWater: 3, healthBurdens: 0, workforceDevelopment: 5},
+            "Wheeler": {totalTracts: 1, dacTracts: 1, percentDac: 1.0, popTotal: 1415, popInDac: 1415, percentPopInDac: 1.0, climateChange: 1, cleanEnergy: 1, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 0, cleanWater: 0, healthBurdens: 1, workforceDevelopment: 0},
+            "Yamhill": {totalTracts: 17, dacTracts: 4, percentDac: 0.2353, popTotal: 104831, popInDac: 19742, percentPopInDac: 0.1883, climateChange: 1, cleanEnergy: 0, cleanTransit: 0, affordableHousing: 0, pollutionRemediation: 1, cleanWater: 0, healthBurdens: 2, workforceDevelopment: 1}
+        };
+        
+        // Justice40 data loaded - 36 Oregon counties
+        
+        // Dummy function for compatibility
+        function loadJustice40Data() {
+            // Data is already loaded above
+            return Promise.resolve();
+        }
+        
+        // Toggle Justice40 section for a county
+        function toggleJustice40(countyName) {
+            const contentId = 'justice40-' + countyName.toLowerCase().replace(/\s+/g, '-');
+            const content = document.getElementById(contentId);
+            const button = content.previousElementSibling;
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                button.classList.remove('active');
+            } else {
+                content.classList.add('active');
+                button.classList.add('active');
+                
+                // Populate data if not already populated
+                if (!content.dataset.populated) {
+                    populateJustice40Content(countyName, content);
+                    content.dataset.populated = 'true';
+                }
+            }
+        }
+        
+        // Populate Justice40 content
+        function populateJustice40Content(countyName, container) {
+            let data = justice40Data[countyName];
+            
+            if (!data) {
+                container.innerHTML = '<p style="text-align: center; color: #888;">Justice40 data not available for ' + countyName + '.</p>';
+                return;
+            }
+            
+            const percentDacFormatted = (data.percentDac * 100).toFixed(1);
+            const percentPopFormatted = (data.percentPopInDac * 100).toFixed(1);
+            const popTotalFormatted = (data.popTotal / 1000).toFixed(1) + 'K';
+            const popInDacFormatted = (data.popInDac / 1000).toFixed(1) + 'K';
+            
+            let dacClass = 'dac-low';
+            if (data.percentDac >= 0.5) dacClass = 'dac-high';
+            else if (data.percentDac >= 0.25) dacClass = 'dac-medium';
+            
+            const html = `
+                <div class="justice40-header">
+                    Justice40 Disadvantaged Communities Analysis
+                </div>
+                
+                <div class="dac-metrics">
+                    <div class="dac-metric">
+                        <span class="dac-metric-value ${dacClass}">${percentDacFormatted}%</span>
+                        <div class="dac-metric-label">DAC Census Tracts</div>
+                    </div>
+                    <div class="dac-metric">
+                        <span class="dac-metric-value">${data.dacTracts}/${data.totalTracts}</span>
+                        <div class="dac-metric-label">Tracts Designated</div>
+                    </div>
+                    <div class="dac-metric">
+                        <span class="dac-metric-value ${dacClass}">${percentPopFormatted}%</span>
+                        <div class="dac-metric-label">Population in DACs</div>
+                    </div>
+                    <div class="dac-metric">
+                        <span class="dac-metric-value">${popInDacFormatted}</span>
+                        <div class="dac-metric-label">People in DACs</div>
+                    </div>
+                </div>
+                
+                <div class="burden-categories">
+                    <h5>Environmental & Economic Justice Burden Categories</h5>
+                    <div class="burden-grid">
+                        <div class="burden-item">
+                            <span class="burden-label">Climate Change</span>
+                            <span class="burden-value ${data.climateChange === 0 ? 'zero' : ''}">${data.climateChange} tract${data.climateChange !== 1 ? 's' : ''}</span>
+                        </div>
+                        <div class="burden-item">
+                            <span class="burden-label">Clean Energy & Efficiency</span>
+                            <span class="burden-value ${data.cleanEnergy === 0 ? 'zero' : ''}">${data.cleanEnergy} tract${data.cleanEnergy !== 1 ? 's' : ''}</span>
+                        </div>
+                        <div class="burden-item">
+                            <span class="burden-label">Clean Transit</span>
+                            <span class="burden-value ${data.cleanTransit === 0 ? 'zero' : ''}">${data.cleanTransit} tract${data.cleanTransit !== 1 ? 's' : ''}</span>
+                        </div>
+                        <div class="burden-item">
+                            <span class="burden-label">Affordable Housing</span>
+                            <span class="burden-value ${data.affordableHousing === 0 ? 'zero' : ''}">${data.affordableHousing} tract${data.affordableHousing !== 1 ? 's' : ''}</span>
+                        </div>
+                        <div class="burden-item">
+                            <span class="burden-label">Pollution Remediation</span>
+                            <span class="burden-value ${data.pollutionRemediation === 0 ? 'zero' : ''}">${data.pollutionRemediation} tract${data.pollutionRemediation !== 1 ? 's' : ''}</span>
+                        </div>
+                        <div class="burden-item">
+                            <span class="burden-label">Clean Water Infrastructure</span>
+                            <span class="burden-value ${data.cleanWater === 0 ? 'zero' : ''}">${data.cleanWater} tract${data.cleanWater !== 1 ? 's' : ''}</span>
+                        </div>
+                        <div class="burden-item">
+                            <span class="burden-label">Health Burdens</span>
+                            <span class="burden-value ${data.healthBurdens === 0 ? 'zero' : ''}">${data.healthBurdens} tract${data.healthBurdens !== 1 ? 's' : ''}</span>
+                        </div>
+                        <div class="burden-item">
+                            <span class="burden-label">Workforce Development</span>
+                            <span class="burden-value ${data.workforceDevelopment === 0 ? 'zero' : ''}">${data.workforceDevelopment} tract${data.workforceDevelopment !== 1 ? 's' : ''}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
     </script>
 </body>
 </html>
