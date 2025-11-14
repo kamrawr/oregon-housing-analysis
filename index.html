@@ -29,6 +29,7 @@
             padding: 60px 20px;
             text-align: center;
             margin: -20px -20px 40px -20px;
+            overflow: visible;
         }
         
         .header h1 {
@@ -36,6 +37,9 @@
             font-size: 3em;
             font-weight: 300;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
         }
         
         .header p {
@@ -225,11 +229,16 @@
             .summary-stats {
                 grid-template-columns: repeat(3, 1fr);
             }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
         }
         
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 2em;
+                font-size: 1.8em;
+                padding: 0 10px;
             }
             
             .card-grid {
