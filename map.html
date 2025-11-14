@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oregon Housing Map | GIS Explorer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --warning: #f39c12;
+        }
+
+        body { 
+            padding: 0; 
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            margin-bottom: 0;
+        }
+
+        header h1 { margin: 0; color: white; font-size: 1.8rem; }
+        header p { margin: 0.5rem 0 0 0; opacity: 0.9; }
+
+        .nav-links {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .map-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            height: calc(100vh - 140px);
+            gap: 0;
+        }
+
+        .control-panel {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            overflow-y: auto;
+            border-right: 2px solid #dee2e6;
+        }
+
+        .control-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .control-section:last-child {
+            border-bottom: none;
+        }
+
+        .control-section h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1rem;
+            color: var(--primary);
+        }
+
+        .layer-option {
+            margin: 0.75rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .layer-option input[type="radio"],
+        .layer-option input[type="checkbox"] {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .layer-option label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        #map {
+            position: relative;
+            background: #e8f4f8;
+            overflow: hidden;
+        }
+
+        #map svg {
+            display: block;
+        }
+
+        .county {
+            stroke: #fff;
+            stroke-width: 1.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .county:hover {
+            stroke: #333;
+            stroke-width: 2.5px;
+            filter: brightness(0.95);
+        }
+
+        .county.selected {
+            stroke: #e74c3c;
+            stroke-width: 3px;
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            font-size: 0.85rem;
+            max-width: 250px;
+        }
+
+        .legend-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 0.4rem 0;
+        }
+
+        .legend-color {
+            width: 24px;
+            height: 18px;
+            margin-right: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+        }
+
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            max-width: 350px;
+            display: none;
+        }
+
+        .info-panel.active {
+            display: block;
+        }
+
+        .info-panel h4 {
+            margin: 0 0 1rem 0;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .info-stat {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .info-value {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .region-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .region-Metro { background: #636efa; color: white; }
+        .region-Valley { background: #ef553b; color: white; }
+        .region-Southern { background: #00cc96; color: white; }
+        .region-Central { background: #ab63fa; color: white; }
+        .region-Coast { background: #ffa15a; color: white; }
+        .region-Eastern { background: #19d3f3; color: white; }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 0.75rem;
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 0.85rem;
+            z-index: 1000;
+            max-width: 250px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 1rem;
+            line-height: 1;
+            padding: 0;
+        }
+
+        .close-btn:hover {
+            background: #c0392b;
+        }
+
+        select, input[type="range"] {
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+
+        .range-value {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        button {
+            margin: 0.5rem 0;
+            width: 100%;
+        }
+
+        .zoom-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .zoom-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #ccc;
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+
+        .zoom-btn:hover {
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 768px) {
+            .map-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .control-panel {
+                border-right: none;
+                border-bottom: 2px solid #dee2e6;
+                max-height: 300px;
+            }
+
+            #map {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🗺️ Oregon Housing GIS Explorer</h1>
+            <p>Interactive county-level insights with multi-layer visualization</p>
+            <div class="nav-links">
+                <a href="index.html">County Database</a>
+                <a href="explore.html">Interactive Explorer</a>
+                <a href="map.html" style="background: rgba(255,255,255,0.3);">GIS Map</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="map-container">
+        <div class="control-panel">
+            <div class="control-section">
+                <h3>🎨 Base Layer</h3>
+                <div class="layer-option">
+                    <input type="radio" id="layer-units" name="layer" value="units" checked>
+                    <label for="layer-units">Housing Units</label>
+                </div>
+                <div class="layer-option">
+                    <input type="radio" id="layer-ami" name="layer" value="ami">
+                    <label for="layer-ami">Area Median Income</label>
+                </div>
+                <div class="layer-option">
+                    <input type="radio" id="layer-low-income" name="layer" value="low-income">
+                    <label for="layer-low-income">Low-Income Share</label>
+                </div>
+                <div class="layer-option">
+                    <input type="radio" id="layer-density" name="layer" value="density">
+                    <label for="layer-density">Housing Density</label>
+                </div>
+                <div class="layer-option">
+                    <input type="radio" id="layer-per-capita" name="layer" value="per-capita">
+                    <label for="layer-per-capita">Units per 1K Residents</label>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>🔍 Overlays</h3>
+                <div class="layer-option">
+                    <input type="checkbox" id="overlay-regions" checked>
+                    <label for="overlay-regions">Regional Boundaries</label>
+                </div>
+                <div class="layer-option">
+                    <input type="checkbox" id="overlay-labels" checked>
+                    <label for="overlay-labels">County Labels</label>
+                </div>
+                <div class="layer-option">
+                    <input type="checkbox" id="overlay-metro">
+                    <label for="overlay-metro">Highlight Metro Area</label>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <h3>🎯 Filters</h3>
+                <label for="region-filter"><strong>Region:</strong></label>
+                <select id="region-filter">
+                    <option value="all">All Regions</option>
+                    <option value="Metro">Metro</option>
+                    <option value="Valley">Valley</option>
+                    <option value="Southern">Southern</option>
+                    <option value="Central">Central</option>
+                    <option value="Coast">Coast</option>
+                    <option value="Eastern">Eastern</option>
+                </select>
+
+                <label for="ami-filter"><strong>Min AMI: <span class="range-value" id="ami-value">$0</span></strong></label>
+                <input type="range" id="ami-filter" min="81400" max="124100" step="5000" value="81400">
+            </div>
+
+            <div class="control-section">
+                <h3>⚙️ Actions</h3>
+                <button onclick="resetView()">Reset View</button>
+                <button onclick="clearSelection()">Clear Selection</button>
+            </div>
+
+            <div class="control-section">
+                <h3>ℹ️ Instructions</h3>
+                <p style="font-size: 0.85rem; color: #666; margin: 0;">
+                    • Click a county for details<br>
+                    • Hover for quick info<br>
+                    • Use filters to focus<br>
+                    • Switch layers to compare
+                </p>
+            </div>
+        </div>
+
+        <div id="map">
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomIn()">+</button>
+                <button class="zoom-btn" onclick="zoomOut()">−</button>
+                <button class="zoom-btn" onclick="resetView()" title="Reset">⟲</button>
+            </div>
+
+            <div class="info-panel" id="info-panel">
+                <button class="close-btn" onclick="clearSelection()">×</button>
+                <div id="info-content"></div>
+            </div>
+
+            <div class="legend" id="legend"></div>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script src="visualizations/js/map.js"></script>
+</body>
+</html>
